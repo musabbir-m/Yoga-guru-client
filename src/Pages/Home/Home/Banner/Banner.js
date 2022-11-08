@@ -1,4 +1,5 @@
 import React from 'react';
+import BannerItem from './BannerItem';
 
 const Banner = () => {
     const bannerData= [
@@ -32,7 +33,15 @@ const Banner = () => {
         },]
     return (
         <div>
-            
+            <div className="carousel w-full mx-auto py-10">
+      {
+       bannerData.map(banner=>
+       <BannerItem
+       key={banner.id}
+       data= {banner}
+       ></BannerItem>
+        )
+      } </div>
         </div>
     );
 };
