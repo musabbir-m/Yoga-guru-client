@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 
 const Services = () => {
@@ -18,9 +19,13 @@ const Services = () => {
         ))}
       </div>
       <div className="flex">
-      <button className="btn btn-active bg-pink-500 border-0 hover:bg-pink-400 rounded-3xl w-48 mx-auto">See All</button>
+        <Link className=" mx-auto mt-5" to="/services">
+        <button className="btn btn-active bg-pink-500 border-0 hover:bg-pink-400 rounded-3xl w-48">
+          See All
+        </button>
+        </Link>
+       
       </div>
-     
     </div>
   );
 };

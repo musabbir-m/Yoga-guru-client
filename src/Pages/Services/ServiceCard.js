@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ data }) => {
   const { title, img, _id, price, level, description } = data;
@@ -10,10 +11,14 @@ const ServiceCard = ({ data }) => {
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
         <p>{description}</p>
-        <div className="card-actions justify-end">
+        <div className="card-actions justify-between">
+        <div className="badge badge-secondary text-white font-bold p-3"><p> <span className="">Price:</span>  $ {price}</p></div>
+          <Link to={`/service/${_id}`}>
           <button className="btn btn-info text-white	border-0 rounded-3xl">
             See Details
           </button>
+          </Link>
+         
         </div>
       </div>
     </div>
