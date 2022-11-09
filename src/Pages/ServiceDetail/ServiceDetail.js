@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import ReviewCard from "../Review/ReviewCard";
 
 const ServiceDetail = () => {
   const data = useLoaderData();
   const user= ''
   const { title, img, description, level, price,_id } = data;
 
-  const [reviews, setReviews] = useState();
+  const [reviews, setReviews] = useState('');
+  const [acknowledged, setAcknowledged]= useState(false)
   console.log(reviews);
   //load review
   useEffect(() => {
     fetch(`http://localhost:5000/reviews?id=${_id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
-  }, [_id]);
+  }, [acknowledged]);
 
   const handleAddReview=(event)=>{
     event.preventDefault()
@@ -46,6 +48,7 @@ const ServiceDetail = () => {
           console.log(data)
           if (data.acknowledged) {
             alert("review added successfully");
+            setAcknowledged(true)
             event.target.reset();
           }
         })
@@ -78,6 +81,11 @@ const ServiceDetail = () => {
           <>
             {" "}
             <h2 className="text-5xl text-center">All reviews</h2>
+            {reviews.map(review=><ReviewCard 
+            key={review._id}
+            data= {review}
+            >
+            </ReviewCard>)}
           </>
         ) : (
           <h2 className="text-5xl text-center"> No reviews yet</h2>
