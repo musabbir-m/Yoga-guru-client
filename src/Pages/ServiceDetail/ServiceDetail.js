@@ -7,6 +7,13 @@ const ServiceDetail = () => {
   const { title, img, description, level, price,_id } = data;
 
   const [reviews, setReviews] = useState();
+  console.log(reviews);
+  //load review
+  useEffect(() => {
+    fetch(`http://localhost:5000/reviews?id=${_id}`)
+      .then((res) => res.json())
+      .then((data) => setReviews(data));
+  }, [_id]);
 
   const handleAddReview=(event)=>{
     event.preventDefault()
