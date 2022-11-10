@@ -10,16 +10,19 @@ const ReviewCard = ({ data }) => {
         <p>{reviewText}</p>
         <div className="card-actions justify-start">
           <div className="avatar">
-            {photoURL? <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img alt="" src={photoURL} />
-            </div>:
-            <div className="avatar placeholder">
-            <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
-              <span className="text-xs">{customer?.limit(0)}</span>
-            </div>
+            {photoURL ? (
+              <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img alt="" src={photoURL} />
+              </div>
+            ) : (
+              <div className="avatar placeholder">
+                <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
+                  <span className="text-xs"></span>
+                </div>
+              </div>
+            )}
           </div>
-            }
-          </div>
+          <h2>{customer}</h2>
         </div>
       </div>
     </div>
