@@ -4,20 +4,25 @@ import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const handleLogOut= ()=>{
+  const handleLogOut = () => {
     logOut()
-    .then(result=> console.log(result))
-    .catch(err=> console.log(err))
-  }
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
+  };
 
   const menuItems = (
     <>
       <li>
-        <Link to="/"> <div className="avatar">
-  <div className="w-16 rounded-full">
-    <img src="favicon.jpg" alt=""/>
-  </div>
-</div> <p className="font-bold text-purple-600">SaraYoga</p> </Link>
+        <Link to="/">
+          {" "}
+          <div className="avatar">
+            <div className="w-16 rounded-full">
+              <img src="favicon.jpg" alt="" />
+            </div>
+          </div>{" "}
+          <p className="font-bold text-purple-600">SaraYoga</p>{" "}
+        </Link>
+
         <Link className="font-semibold" to="/">
           Home
         </Link>
@@ -33,7 +38,6 @@ const Navbar = () => {
             <button className="font-semibold" onClick={handleLogOut}>
               Logout
             </button>
-            
           </>
         ) : (
           <>
@@ -43,7 +47,7 @@ const Navbar = () => {
           </>
         )}
 
-        <Link className="font-semibold">Blog</Link>
+        <Link to='/blog' className="font-semibold">Blog</Link>
       </li>
     </>
   );

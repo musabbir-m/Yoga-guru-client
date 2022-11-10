@@ -2,6 +2,7 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
 import Allservices from "../../Pages/Allservices/Allservices";
+import Blog from "../../Pages/Blog/Blog";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import ServiceDetail from "../../Pages/ServiceDetail/ServiceDetail";
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
           </Privateroute>
         ),
       },
+      {
+        path: '/blog',
+        element: <Blog></Blog>
+      }
     ],
   },
 ]);
