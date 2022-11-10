@@ -9,7 +9,7 @@ const ServiceDetail = () => {
 
   const { title, img, description, level, price, _id } = data;
 
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState('');
   const [acknowledged, setAcknowledged] = useState(false);
   console.log(reviews);
   //load review
@@ -86,6 +86,10 @@ const ServiceDetail = () => {
       {/* review section*/}
 
       <div className="mt-5">
+
+        {
+         
+        }
         {reviews ? (
           <>
             {" "}

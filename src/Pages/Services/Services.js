@@ -2,15 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 
+
 const Services = () => {
   const makeSlice = true;
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     fetch("https://yoga-coach-server.vercel.app/services")
       .then((res) => res.json())
-      .then((data) => setServices(data));
+      .then((data) => {setServices(data)
+      setLoading(false)
+      });
   }, []);
-
+ 
+  if (loading){
+    return (<div className="mx-auto my-auto">
+      <button className="btn btn-square loading"></button>
+    </div>)
+  }
   return (
     <div className="my-10 ">
       <h2 className="text-5xl py-10 text-center">Available Trainings</h2>

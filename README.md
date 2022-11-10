@@ -1,5 +1,5 @@
 * 
-<h1> Porject Name: Sara Yoga </h1>
+<h1> Porject Name: Yoga-guru </h1>
 <p> Live website link: https://yoga-guru-e45e1.web.app/</p>
 
 

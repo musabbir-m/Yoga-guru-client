@@ -20,7 +20,7 @@ const Navbar = () => {
               <img src="favicon.jpg" alt="" />
             </div>
           </div>{" "}
-          <p className="font-bold text-purple-600">SaraYoga</p>{" "}
+          <p className="font-bold text-purple-600">YogaGuru</p>{" "}
         </Link>
 
         <Link className="font-semibold" to="/">
