@@ -1,15 +1,16 @@
 import React from "react";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
-
+import './BannerItem.css'
 const BannerItem = ({ data }) => {
   const { id, image, next, prev } = data;
   return (
     <div id={`slide${id}`} className="carousel-item relative w-full">
-      <img className="w-full h-full" src={image} alt="" />
+      
+      <img id="carousel-img" className="w-full rounded-xl" src={image} alt="" />
 
-      <div className="absolute flex justify-end transform -translate-y-1/2 left-24  top-1/4">
-          <h1 className="text-6xl text-white font-bold">
-            Best Yoga Trainer for You
+      <div className="absolute flex justify-end transform -translate-y-1/2 left-48  top-1/2">
+          <h1 className="text-6xl text-green-600 font-bold">
+            Best Yoga Training Services and <br /> Yoga Session for You
           </h1>
         </div>
 

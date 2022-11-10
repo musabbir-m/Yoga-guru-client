@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import MyReviewCard from "./MyReviewCard";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MyReveiws = () => {
   const { user } = useContext(AuthContext);
   const email = user.email;
   console.log(user);
-
+  const notify = () => toast("Wow so easy!");
 
 
   const [myreveiws, setMyreviews] = useState([]);
@@ -31,7 +33,7 @@ const MyReveiws = () => {
             
             const remaining = myreveiws.filter((review) => review._id !== id);
             setMyreviews(remaining);
-            alert("order deleted successfully");
+            notify()
           }
           
         });
