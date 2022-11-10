@@ -66,12 +66,15 @@ const ServiceDetail = () => {
     <div>
       <div className="card lg:card-side bg-base-100 shadow-xl">
         <figure>
-          <img className="" src={img} alt="Album" />
+          <img className="w-2/3" src={img} alt="Album" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{title}</h2>
+          <h2 className="card-title text-emerald-400	">{title}</h2>
           <p>{description}</p>
-          <div className="card-actions justify-end"></div>
+          <div className="card-actions justify-end">
+            <p className="font-bold "> <span className="text-purple-600">Level: </span> {level}</p>
+            <p className="font-bold"> <span className="text-purple-600">Price:</span>  $ {price}</p>
+          </div>
         </div>
       </div>
       {/* review section*/}

@@ -4,6 +4,7 @@ import { HiCheckCircle } from "react-icons/hi"
 const Features = () => {
   return (
     <div>
+      <h2 className="text-5xl bg text-center bg-emerald-300 p-3 rounded-xl text-white mt-10">I provide ultimate yoga training</h2>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 my-10">
         <div className=" px-5 w- shadow-lg py-3 border-2 rounded-lg border-inherit hover:text-white hover:bg-cyan-400">
           <h2 className="text-3xl font-bold">Support and motivaiton</h2>
@@ -39,9 +40,9 @@ const Features = () => {
         <img className="w-full rounded-xl h-full center" src="https://img.freepik.com/free-photo/portrait-young-woman-meditating-pose-lotus-isolated_231208-10371.jpg?size=626&ext=jpg&ga=GA1.2.523338265.1658893333&semt=sph" alt="" />
 
         <div className="p-5">
-            <p className="text-emerald-500">Why yoga?</p>
+            <p className="text-emerald-500 font-bold">What I offer?</p>
           <h2 className="text-5xl py-5">
-            Bring The Healthiest Change in Your Life by Yoga
+            I will help you to bring The Healthiest Change in Your Life by Yoga
           </h2>
           <p className="text-xl ">
             Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis.

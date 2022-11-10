@@ -10,6 +10,7 @@ const MyReveiws = () => {
 
 
   const [myreveiws, setMyreviews] = useState([]);
+  const [acknowledge, setAcknowledge]= useState(false)
   console.log(myreveiws);
   useEffect(() => {
     fetch(`http://localhost:5000/myreviews?email=${email}`)
@@ -32,7 +33,7 @@ const MyReveiws = () => {
             setMyreviews(remaining);
             alert("order deleted successfully");
           }
-          console.log(data);
+          
         });
     }
   };
@@ -49,12 +50,17 @@ const handleReviewUpdate = (id, text) => {
     })
       .then((res) => res.json)
       .then((data) => {
-        // const remaining= myreveiws.filter(review=>review._id!== id)
-        // const updated= myreveiws.find(review=>review._id=== id)
-        
-        // const newReviews= [updated,...myreveiws ]
+        // const remaining= myreveiws.filter(odr=>odr._id!== id)
+        // const updating= myreveiws.find(odr=>odr._id=== id)
+        // updating.reviewText= text
+        // const newReviews= [updating, ...myreveiws]
         // setMyreviews(newReviews)
         console.log(data);
+        if(data.acknowledged){
+            alert('review updated successfully')
+            setAcknowledge(true)
+
+        }
       });
   };
 
@@ -75,6 +81,7 @@ const handleReviewUpdate = (id, text) => {
           data={review}
           handleDelete= {handleDelete}
           handleReviewUpdate={handleReviewUpdate}
+          acknowledged={acknowledge}
           >
 
           </MyReviewCard>

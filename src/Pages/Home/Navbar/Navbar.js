@@ -13,6 +13,11 @@ const Navbar = () => {
   const menuItems = (
     <>
       <li>
+        <Link to="/"> <div className="avatar">
+  <div className="w-16 rounded-full">
+    <img src="favicon.jpg" alt=""/>
+  </div>
+</div> <p className="font-bold text-purple-600">SaraYoga</p> </Link>
         <Link className="font-semibold" to="/">
           Home
         </Link>
@@ -37,6 +42,8 @@ const Navbar = () => {
             </Link>
           </>
         )}
+
+        <Link className="font-semibold">Blog</Link>
       </li>
     </>
   );

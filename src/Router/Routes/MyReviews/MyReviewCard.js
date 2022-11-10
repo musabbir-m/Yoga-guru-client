@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const MyReviewCard = ({ data, handleDelete, handleReviewUpdate }) => {
+const MyReviewCard = ({ data, handleDelete, handleReviewUpdate, acknowledged }) => {
   const { serviceName, reviewText, photoURL, customer, service, _id } = data;
 
   const update = (event) => {
     event.preventDefault();
     const form = event.target;
     const text = form.text.value;
+    form.reset()
 
     handleReviewUpdate(_id, text);
+    if(acknowledged){
+        alert('success')
+    }
+
   };
 
   return (
@@ -37,27 +42,25 @@ const MyReviewCard = ({ data, handleDelete, handleReviewUpdate }) => {
           {/* The button to open modal */}
 
           {/* The button to open modal */}
-          <label htmlFor="my-modal-6" className="btn">
-            open modal
+          <label htmlFor="my-modal-6" className="btn btn-accent btn-xs">
+            update
           </label>
 
           {/* Put this part before </body> tag */}
           <input type="checkbox" id="my-modal-6" className="modal-toggle" />
           <div className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
-              <h3 className="font-bold text-lg">
-                Congratulations random Internet user!
-              </h3>
-              <form
+              <h3 className="font-bold text-lg">{serviceName}</h3>
+              <form className="flex justify-between"
                 onSubmit={update}
-                action="
-    "
+                action=""
               >
-                <input name="text" placeholder="update review" type="text" />
-                <input type="submit" className="btn" value="Update" />
+                
+                <textarea name="text" className="textarea w-48 textarea-success" placeholder="update review"></textarea>
+                <input type="submit" className="btn btn-xs" value="Update" />
               </form>
               <div className="modal-action">
-                <label htmlFor="my-modal-6" className="btn">
+                <label htmlFor="my-modal-6" className="btn btn-xs">
                   close
                 </label>
               </div>
@@ -69,7 +72,7 @@ const MyReviewCard = ({ data, handleDelete, handleReviewUpdate }) => {
             onClick={() => {
               handleDelete(_id);
             }}
-            className="btn btn-xs"
+            className="btn btn-secondary btn-xs"
           >
             delete
           </button>

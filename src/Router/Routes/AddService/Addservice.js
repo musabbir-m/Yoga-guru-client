@@ -47,6 +47,7 @@ const Addservice = () => {
 
   return (
     <div>
+        <h2 className="text-5xl text-center">Add a Yoga training</h2>
       <form onSubmit={handleAddService} action="">
         <div className="grid grid-cols-1 lg:grid-cols-2 mx-auto gap-3 mt-5">
           <input
