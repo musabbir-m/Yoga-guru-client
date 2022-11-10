@@ -51,11 +51,7 @@ const MyReveiws = () => {
     })
       .then((res) => res.json)
       .then((data) => {
-        // const remaining= myreveiws.filter(odr=>odr._id!== id)
-        // const updating= myreveiws.find(odr=>odr._id=== id)
-        // updating.reviewText= text
-        // const newReviews= [updating, ...myreveiws]
-        // setMyreviews(newReviews)
+       
         console.log(data);
         if (data.acknowledged) {
           alert("review updated successfully");
