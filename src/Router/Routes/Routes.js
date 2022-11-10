@@ -32,13 +32,13 @@ const router = createBrowserRouter([
       {
         path: "/services",
         element: <Allservices></Allservices>,
-        loader: () => fetch("http://localhost:5000/allservices"),
+        loader: () => fetch("https://yoga-coach-server.vercel.app/allservices"),
       },
       {
         path: "/service/:id",
         element: <ServiceDetail></ServiceDetail>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/service/${params.id}`),
+          fetch(`https://yoga-coach-server.vercel.app/service/${params.id}`),
       },
 
       {
@@ -51,9 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/update",
-        element: (
-          <UpdateReview></UpdateReview>
-        ),
+        element: <UpdateReview></UpdateReview>,
       },
       {
         path: "/addservice",
@@ -64,9 +62,9 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/blog',
-        element: <Blog></Blog>
-      }
+        path: "/blog",
+        element: <Blog></Blog>,
+      },
     ],
   },
 ]);
