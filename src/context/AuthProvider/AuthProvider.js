@@ -31,6 +31,7 @@ import {
       setLoading(true)
       return createUserWithEmailAndPassword(auth, email, password);
     };
+    
     //for login
     const Login = (email, password) => {
       setLoading(true)

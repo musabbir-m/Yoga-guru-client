@@ -1,30 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const Navbar = () => {
-    const menuItems = (
-        <>
-          <li>
-            <Link className="font-semibold" to="/">
-              Home
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut= ()=>{
+    logOut()
+    .then(result=> console.log(result))
+    .catch(err=> console.log(err))
+  }
+
+  const menuItems = (
+    <>
+      <li>
+        <Link className="font-semibold" to="/">
+          Home
+        </Link>
+
+        {user?.uid ? (
+          <>
+            <Link className="font-semibold" to="/login">
+              Add service
             </Link>
-           
+            <Link className="font-semibold" to="/login">
+              My review
+            </Link>
+            <button onClick={handleLogOut}>
+              Logout
+            </button>
             
-              <>
-                <Link className="font-semibold" to="/orders">
-                  Orders
-                </Link>
-              </>
-        
-              <Link className="font-semibold" to="/login">
-                Login
-              </Link>
-        
-          </li>
-        </>
-      );
-    return (
-        <div className="h-20 mb-12 pt-12 navbar bg-base-100 ">
+          </>
+        ) : (
+          <>
+            <Link className="font-semibold" to="/login">
+              Login
+            </Link>
+          </>
+        )}
+      </li>
+    </>
+  );
+  return (
+    <div className="h-20 mb-12 pt-12 navbar bg-base-100 ">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -52,17 +69,15 @@ const Navbar = () => {
           </ul>
         </div>
         <Link className="btn btn-ghost normal-case text-xl">
-          <img src={''} alt="" />
+          <img src={""} alt="" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
-      <div className="navbar-end">
-       
-      </div>
+      <div className="navbar-end"></div>
     </div>
-    );
+  );
 };
 
 export default Navbar;

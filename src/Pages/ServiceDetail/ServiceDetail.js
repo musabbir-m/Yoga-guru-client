@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import ReviewCard from "../Review/ReviewCard";
 
 const ServiceDetail = () => {
+  const { user } = useContext(AuthContext);
   const data = useLoaderData();
-  const user= ''
-  const { title, img, description, level, price,_id } = data;
 
-  const [reviews, setReviews] = useState('');
-  const [acknowledged, setAcknowledged]= useState(false)
+  const { title, img, description, level, price, _id } = data;
+
+  const [reviews, setReviews] = useState(null);
+  const [acknowledged, setAcknowledged] = useState(false);
   console.log(reviews);
   //load review
   useEffect(() => {
@@ -17,45 +19,45 @@ const ServiceDetail = () => {
       .then((data) => setReviews(data));
   }, [acknowledged]);
 
-  const handleAddReview=(event)=>{
-    event.preventDefault()
-    const form= event.target 
-    const  name= form.name
-    const email= user?.email || 'undefined' 
-    const reviewText= form.review.value 
+  const handleAddReview = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name;
+    const email = user?.email || "undefined";
+    const photoURL = user.photoURL;
+    const reviewText = form.review.value;
 
-    const review= {
-        service: _id,
-        serviceName: title,
-        customer: name,
-        email,
-        reviewText
-    }
-
-    fetch(
-        "http://localhost:5000/review",
-  
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(review),
-        })
-       
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data)
-          if (data.acknowledged) {
-            alert("review added successfully");
-            setAcknowledged(true)
-            event.target.reset();
-          }
-        })
-        .catch((err) => console.log(err));
+    const review = {
+      service: _id,
+      serviceName: title,
+      customer: name,
+      email,
+      reviewText,
+      photoURL,
     };
 
-  
+    fetch(
+      "http://localhost:5000/review",
+
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(review),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          alert("review added successfully");
+          setAcknowledged(true);
+          event.target.reset();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   //   useEffect(
   //     ()=> fetch()
@@ -69,9 +71,7 @@ const ServiceDetail = () => {
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
           <p>{description}</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Listen</button>
-          </div>
+          <div className="card-actions justify-end"></div>
         </div>
       </div>
       {/* review section*/}
@@ -80,17 +80,16 @@ const ServiceDetail = () => {
         {reviews ? (
           <>
             {" "}
-            <h2 className="text-5xl text-center">All reviews</h2>
-            {reviews.map(review=><ReviewCard 
-            key={review._id}
-            data= {review}
-            >
-            </ReviewCard>)}
+            <h2 className="text-5xl text-center">Reviews</h2>
+            {reviews.map((review) => (
+              <ReviewCard key={review._id} data={review}></ReviewCard>
+            ))}
           </>
         ) : (
           <h2 className="text-5xl text-center"> No reviews yet</h2>
         )}
-        <div className="mt-10">
+        {user?.uid ? <>
+            <div className="mt-10">
           <h2 className="text-3xl text-center">Add your review</h2>
           {/* form to add review */}
           <form onSubmit={handleAddReview} action="">
@@ -107,7 +106,6 @@ const ServiceDetail = () => {
                 placeholder="Your Name"
                 className="input input-info w-full input-bordered  "
                 defaultValue=""
-                
               />
             </div>
 
@@ -116,9 +114,17 @@ const ServiceDetail = () => {
               className=" mt-5 textarea textarea-info  w-full"
               placeholder="Write review"
             ></textarea>
-            <input className="btn btn-active btn-secondary" type="submit" value="Submit review" />
+            <input
+              className="btn btn-active btn-secondary"
+              type="submit"
+              value="Submit review"
+            />
           </form>
         </div>
+        </> : <>
+        <h2>Login to add review</h2>
+        </>}
+        
       </div>
     </div>
   );
