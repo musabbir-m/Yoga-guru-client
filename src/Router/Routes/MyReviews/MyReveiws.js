@@ -1,11 +1,87 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
+import MyReviewCard from "./MyReviewCard";
 
 const MyReveiws = () => {
-    return (
-        <div>
-            
-        </div>
+  const { user } = useContext(AuthContext);
+  const email = user.email;
+  console.log(user);
+
+
+
+  const [myreveiws, setMyreviews] = useState([]);
+  console.log(myreveiws);
+  useEffect(() => {
+    fetch(`http://localhost:5000/myreviews?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => setMyreviews(data));
+  }, [email]);
+
+  const handleDelete = (id) => {
+    const proceed = window.confirm(
+      "Are you sure you want to cancel this order?"
     );
+
+    if (proceed) {
+      fetch(`http://localhost:5000/service/${id}`, { method: "DELETE" })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            
+            const remaining = myreveiws.filter((review) => review._id !== id);
+            setMyreviews(remaining);
+            alert("order deleted successfully");
+          }
+          console.log(data);
+        });
+    }
+  };
+
+  // handle update review
+
+const handleReviewUpdate = (id, text) => {
+    fetch(`http://localhost:5000/service/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({text}),
+    })
+      .then((res) => res.json)
+      .then((data) => {
+        // const remaining= myreveiws.filter(review=>review._id!== id)
+        // const updated= myreveiws.find(review=>review._id=== id)
+        
+        // const newReviews= [updated,...myreveiws ]
+        // setMyreviews(newReviews)
+        console.log(data);
+      });
+  };
+
+  if(myreveiws.length<1){
+    return (<>
+    <h2 className="text-5xl text-center my-16">No review added</h2>
+    </>)
+  }
+  return (
+    <div>
+
+
+        <h2 className="text-5xl text-center p-5"> Your reviews</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+        {myreveiws.map((review) => (
+          <MyReviewCard 
+          key={review._id} 
+          data={review}
+          handleDelete= {handleDelete}
+          handleReviewUpdate={handleReviewUpdate}
+          >
+
+          </MyReviewCard>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default MyReveiws;
