@@ -19,10 +19,10 @@ const Login = () => {
       .then((user) => {
         const currentUser = user.user;
         console.log(currentUser);
-        navigate(from, { replace: true });
         setError("");
         setSuccess(true);
         form.reset();
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.error(err);

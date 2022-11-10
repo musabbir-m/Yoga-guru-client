@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import ReviewCard from "../Review/ReviewCard";
 
@@ -22,9 +22,9 @@ const ServiceDetail = () => {
   const handleAddReview = (event) => {
     event.preventDefault();
     const form = event.target;
-    const name = form.name;
-    const email = user?.email || "undefined";
-    const photoURL = user.photoURL;
+    const name = form.name.value;
+    const email = form.email.value
+    const photoURL = form.photourl.value
     const reviewText = form.review.value;
 
     const review = {
@@ -81,9 +81,12 @@ const ServiceDetail = () => {
           <>
             {" "}
             <h2 className="text-5xl text-center">Reviews</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {reviews.map((review) => (
               <ReviewCard key={review._id} data={review}></ReviewCard>
             ))}
+            </div>
+           
           </>
         ) : (
           <h2 className="text-5xl text-center"> No reviews yet</h2>
@@ -93,19 +96,27 @@ const ServiceDetail = () => {
           <h2 className="text-3xl text-center">Add your review</h2>
           {/* form to add review */}
           <form onSubmit={handleAddReview} action="">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-5">
+            <div className="grid grid-cols-1 lg:grid-cols-3 mx-auto gap-3 mt-5">
               <input
                 type="text"
+                name="email"
                 placeholder="Your Email"
                 className="input input-info w-full input-bordered"
-                defaultValue=""
-                readOnly
+                defaultValue={user.email}
+                
               />
               <input
                 type="text"
                 placeholder="Your Name"
                 className="input input-info w-full input-bordered  "
                 defaultValue=""
+              />
+              <input
+                type="text"
+                name="photourl"
+                placeholder="photo url"
+                className="input input-info w-full input-bordered  "
+                defaultValue={user?.photoURL}
               />
             </div>
 
@@ -115,14 +126,16 @@ const ServiceDetail = () => {
               placeholder="Write review"
             ></textarea>
             <input
-              className="btn btn-active btn-secondary"
+              className="btn btn-active btn-secondary flex justify-center"
               type="submit"
               value="Submit review"
             />
           </form>
         </div>
         </> : <>
-        <h2>Login to add review</h2>
+       <h2  className="text-3xl text-center my-6 mx-auto hover:text-orange-400">
+       <Link to='/login'>Login to add review </Link>  
+        </h2> 
         </>}
         
       </div>

@@ -19,13 +19,13 @@ const Navbar = () => {
 
         {user?.uid ? (
           <>
-            <Link className="font-semibold" to="/login">
+            <Link className="font-semibold" to="/addservice">
               Add service
             </Link>
-            <Link className="font-semibold" to="/login">
+            <Link className="font-semibold" to="/myreveiws">
               My review
             </Link>
-            <button onClick={handleLogOut}>
+            <button className="font-semibold" onClick={handleLogOut}>
               Logout
             </button>
             
